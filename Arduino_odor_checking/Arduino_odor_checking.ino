@@ -9,6 +9,14 @@ Kobal method odor exposure system.
 SvmePin is always opened through experiment by toggle switch.
 */
 
+/******************************************************************************/
+// When you want to check device action, set isCheck true.
+// If isCheck is true, skip dummyScan, initialRest and questionnaire.
+boolean isCheck = false;
+
+// If fMRI experiment, then true. @Saijo, then false.
+boolean isMRIexperiment = true;
+ 
 /******************************* Set pin Number *******************************/
 // !caution!
 // Depending on pin number, some pins may conflict.
