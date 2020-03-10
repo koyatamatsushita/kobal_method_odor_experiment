@@ -16,7 +16,7 @@ SvmePin is always opened through experiment by toggle switch.
 boolean isCheck = false;
 
 // If fMRI experiment, then true. @Saijo, then false.
-boolean isMRIexperiment = false;
+boolean isMRIexperiment = true;
  
 /******************************* Set pin Number *******************************/
 // !caution!
@@ -32,15 +32,21 @@ boolean isMRIexperiment = false;
 
 /******************************** Set variable ********************************/
 // Please set session and trial num.
-const int SessionNum = 2;
-const int TrialNum = 15;
+const int SessionNum = 3;
+const int TrialNum = 4;
+const int RunNum = 3;
 
 // Please set stimulation pattern.
-const int OdorPattern[SessionNum][TrialNum] = { 
-  {Air, Odor1, Odor2, Odor1, Air, Odor2, Air, Odor2, Odor1, 
-   Air, Odor1, Odor2, Air, Odor1, Odor2},  //Session1
-  {Odor1, Air, Odor2, Odor2, Air, Odor1, Air, Odor1, Odor2, 
-   Air, Odor2, Air, Odor1, Odor2, Odor1}   //Session2
+const int OdorPattern[SessionNum][RunNum][TrialNum] = { 
+  { {Air, Odor1, Odor2, Odor1}, 
+    {Air, Odor2, Air, Odor2}, 
+    {Odor1, Air, Odor1, Odor2} },// session1
+  { {Air, Odor1, Odor2, Odor1}, 
+    {Air, Odor2, Odor2, Air}, 
+    {Odor1, Air, Odor1, Odor2} },//session2
+  { {Air, Odor2, Air, Odor1}, 
+    {Odor2, Odor1, Odor1, Air},
+    {Air, Odor2, Odor1, Odor2} }//session3
 };
 
 /******************************************************************************/
@@ -49,7 +55,8 @@ int i = 0;
 int odorType;
 int sessionCounter = 0;
 int trialCounter = 0;
-int mriPulseCounter = 0;
+int runCounter = 0;
+//int mriPulseCounter = 0;
 boolean trialFlag = true; // ニオイ提示前はtrue，提示したらfalse
 
 // Function prototype
@@ -124,31 +131,35 @@ void loop() {
      * Session loop
      */
     for(sessionCounter=0; sessionCounter<SessionNum; sessionCounter++){
-
       dummyScan(isMRIexperiment); // 10000 msec
-      
-      initialRest(60000); // long msec
-      
-      questionnaire(); // initial questionnaire task for 24000 msec
 
-
-      // rest + odor trial + questionnaire
-      for(trialCounter=0; trialCounter<TrialNum; trialCounter++){
-        odorType = OdorPattern[sessionCounter][trialCounter];
+      for(runCounter=0; runCounter<RunNum; runCounter++){
+      
+        initialRest(15000); // long msec
         
-        fillUpOdor(odorType, 1000); // long msec
-
-        odorTrial(odorType, 5000); // long msec
-
-        rest(1000); // long msec
-
-        questionnaire(); // questionnaire 24000 msec
+        questionnaire(); // initial questionnaire task for 24000 msec
+  
+        // rest + odor trial + questionnaire
+        for(trialCounter=0; trialCounter<TrialNum; trialCounter++){
+          odorType = OdorPattern[sessionCounter][runCounter][trialCounter];
+          
+          fillUpOdor(odorType, 2000); // long msec
+  
+          odorTrial(odorType, 6000); // long msec
+  
+          questionnaire(); // questionnaire 24000 msec
+        }
       }
+
+      initialRest(15000);
 
       Serial.print('j'); // session interval
       if(sessionCounter==0){
-        while(1)
-          if(Serial.read()=='a') break;
+        while(1) {
+          if(Serial.read()=='a'){
+            break;
+          }
+        }
       }
     }
     
@@ -171,15 +182,21 @@ void loop() {
 // Dummy scan (10000 msec)
 void dummyScan(boolean isMRIexperiment) {
   Serial.print('f'); // dummy scan display
+  delay(50);
   
   if(isMRIexperiment == true) {
     // @fMRI experiment
+    int mriPulseCounter = 1;
+    
     while(1){
-      if(digitalRead(MRIpulse) == HIGH && mriPulseCounter < 10){
+      if(digitalRead(MRIpulse) == HIGH && mriPulseCounter < 10) {
         mriPulseCounter++;
+        Serial.print('y'); // test
         delay(500);
 
-      } else if(digitalRead(MRIpulse == HIGH && mriPulseCounter == 10)){
+      } else if(digitalRead(MRIpulse) == HIGH && mriPulseCounter == 10) {
+        //Serial.print('y');
+        //delay(50);
         break;
       
       }
