@@ -186,7 +186,7 @@ void dummyScan(boolean isMRIexperiment) {
   
   if(isMRIexperiment == true) {
     // @fMRI experiment
-    int mriPulseCounter = 1;
+    int mriPulseCounter = 0;
     
     while(1){
       if(digitalRead(MRIpulse) == HIGH && mriPulseCounter < 10) {
