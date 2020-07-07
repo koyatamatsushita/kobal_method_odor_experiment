@@ -165,6 +165,11 @@ void draw() {
       println("\nダミースキャン10sec");
       
       question.darkScreen();
+      fill(255);
+      noStroke();
+      rectMode(CENTER);
+      rect(width/2,height/2,20,120);
+      rect(width/2,height/2,120,20);
       
       port.clear();
       break;
