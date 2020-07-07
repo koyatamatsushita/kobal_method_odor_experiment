@@ -187,7 +187,7 @@ void dummyScan(boolean isMRIexperiment) {
 
   if(isMRIexperiment == true) {
     // @fMRI experiment
-    int mriPulseCounter = 1;
+    int mriPulseCounter = 0;
 
     while(1){
       if(digitalRead(MRIpulse) == HIGH && mriPulseCounter < 10) {
@@ -291,7 +291,7 @@ void stimulation(int odorType) {
   digitalWrite(SincPin, LOW);
   delay(20);
   digitalWrite(SwitchingPin, LOW);
-  
+
 }
 
 
@@ -310,14 +310,14 @@ void odorTrial(int odorType, long trialTime, boolean breathFlag) {
     if(breathFlag == true) {
       i = 0;
       int i_stimNum = 0;
-      
+
       while(1){
         if(digitalRead(BreathPulse) == HIGH && i < ((trialTime-1000)/10)) {
           // When catch the breath pulse
           stimulation(odorType); // 1000 ms
           i_stimNum++;
         }
-        
+
         if(i >= ((trialTime-i_stimNum*1000-40)/10)){
           // Finish stimulate odor trial
           delay(20);
