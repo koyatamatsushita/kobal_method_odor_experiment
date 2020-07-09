@@ -1,6 +1,7 @@
 /*
 2020.02.20 @ author : Koyata Matsushita
-2020.07.07 changed
+2020.07.07 edited
+    プロトコルを変更，安静時ニオイパルスチェックを導入
 
 For fMRI experiment.
 
@@ -14,7 +15,7 @@ SvmePin is always opened through experiment by toggle switch.
 /******************************************************************************/
 // When you want to check device action, set isCheck true.
 // If isCheck is true, skip dummyScan, initialRest and questionnaire.
-boolean isCheck = false;
+boolean isCheck = true;
 
 // If fMRI experiment, then true. @Saijo, then false.
 boolean isMRIexperiment = false;
@@ -212,7 +213,7 @@ void dummyScan(boolean isMRIexperiment) {
 
 
 // Rest for the first time (long(restTime) ms)
-void initialRest(long restTime) {
+boolean initialRest(long restTime) {
   Serial.print('a'); // initial rest display
 
   sincPulse(); // 100 ms
@@ -255,7 +256,7 @@ void questionnaire() {
 }
 
 
-// rest and fill up odor (long(restTime) ms)
+// rest and fill up odor (long(restTime) ms, restTime>2000)
 // With odor presentation task, AirPin is closed and OdorPin is opened.
 void fillUpOdor(int odorType, long restTime) {
   Serial.print('b'); // odor screen
@@ -265,10 +266,11 @@ void fillUpOdor(int odorType, long restTime) {
     delay(restTime - 100);
 
   } else {
+    delay(restTime-2200);
     digitalWrite(Air, LOW);
     delay(100);
     digitalWrite(odorType, HIGH); // fill up odor
-    delay(restTime - 200);
+    delay(2000);
 
   }
 }

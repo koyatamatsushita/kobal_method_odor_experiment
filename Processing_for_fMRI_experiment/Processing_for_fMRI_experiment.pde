@@ -22,7 +22,7 @@ void setup() {
   question = new Questionnaire();
   
   // シリアルポートの設定
-  port = new Serial(this,"COM3", 9600); //Arduino>ツール＞ボードから要確認！  
+  port = new Serial(this,"COM4", 9600); //Arduino>ツール＞ボードから要確認！  
   
   // 画面の初期設定
   size(1950,1050);
@@ -52,7 +52,7 @@ void draw() {
       
     // 初期安静
     case 'a':
-      println("\n初期安静中...\n");
+      println("\n15s Rest...");
       
       question.darkScreen();
       fill(255);
@@ -67,7 +67,7 @@ void draw() {
 
     // 安静
     case 'b':
-      println("\n安静中\n");
+      println("\nニオイ提示前...\n");
       question.darkScreen();
       fill(255);
       noStroke();
@@ -80,7 +80,7 @@ void draw() {
 
     // 無臭
     case 'n':
-      println("無臭 5sec");
+      println("無臭 15sec");
       
       question.darkScreen();
       fill(255);
@@ -96,7 +96,7 @@ void draw() {
 
     // 快臭
     case 'p':
-      println("快臭提示 2sec...");
+      println("快臭提示 1sec...");
       
       question.darkScreen();
       fill(255);
@@ -112,7 +112,7 @@ void draw() {
     
     // 不快臭
     case 'u':
-      println("不快臭提示 2sec...");
+      println("不快臭提示 1sec...");
       
       question.darkScreen();
       fill(255);
@@ -177,7 +177,7 @@ void draw() {
 
     // アンケート開始前5sec画面
     case 'g':
-      println("アンケートを始めます");
+      println("\nアンケートを始めます");
       
       question.darkScreen();
       textAlign(CENTER);
@@ -331,10 +331,10 @@ class Questionnaire{
     fill(255);
     
     text("ニオイの強さ", width/3, height/3-100);
-    text("目が覚めるようなニオイ", (width*2)/3, height/3-100);
-    text("眠たくなるようなニオイ", (width)/4, height/3);
-    text("いいニオイ", (width*2)/4, height/3);
-    text("いやなニオイ", (width*3)/4, height/3);
+    text("活性度", (width*2)/3, height/3-100);
+    text("非活性度", (width)/4, height/3);
+    text("快度", (width*2)/4, height/3);
+    text("不快度", (width*3)/4, height/3);
         
     fill(255,0,0);
     switch(questionNo){
@@ -345,27 +345,27 @@ class Questionnaire{
         break;
         
       case 1:
-        text("目が覚めるようなニオイ", (width*2)/3, height/3-100);
-        text("__________________________", (width*2)/3, height/3-100);
-        println("1. 活性");
+        text("活性度", (width*2)/3, height/3-100);
+        text("__________", (width*2)/3, height/3-100);
+        println("1. 活性度");
         break;
         
       case 2:
-        text("眠たくなるようなニオイ", (width)/4, height/3);
-        text("__________________________", (width)/4, height/3);
-        println("2. 非活性");
+        text("非活性度", (width)/4, height/3);
+        text("____________", (width)/4, height/3);
+        println("2. 非活性度");
         break;
         
       case 3:
-        text("いいニオイ", (width*2)/4, height/3);
-        text("______________", (width*2)/4, height/3);
-        println("3. 快");
+        text("快度", (width*2)/4, height/3);
+        text("________", (width*2)/4, height/3);
+        println("3. 快度");
         break;
         
       case 4:
-        text("いやなニオイ", (width*3)/4, height/3);
-        text("_____________", (width*3)/4, height/3);
-        println("4. 不快");
+        text("不快度", (width*3)/4, height/3);
+        text("__________", (width*3)/4, height/3);
+        println("4. 不快度");
         break;
     }
     

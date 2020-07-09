@@ -1,5 +1,7 @@
 /*
 2020.02.20 @ author : Koyata Matsushita
+2020.07.09 edited
+    画像提示なし，ニオイ提示秒数を現行プロトコルのものに調整
 
 For odor threshold controll.
 
@@ -15,8 +17,14 @@ SvmePin is always opened through experiment by toggle switch.
 boolean isCheck = false;
 
 // If fMRI experiment, then true. @Saijo, then false.
-boolean isMRIexperiment = true;
- 
+boolean isMRIexperiment = false;
+
+// Select odor combination
+// [Odor1Type] lactone: p, PEA: o, sycroten: i
+char Odor1Type = 'p';
+// [Odor2Type] heptanal: q, benzene: w
+char Odor2Type = 'q';
+
 /******************************* Set pin Number *******************************/
 // !caution!
 // Depending on pin number, some pins may conflict.
@@ -29,37 +37,15 @@ boolean isMRIexperiment = true;
 #define MRIpulse 13 // receive fMRI pulse
 
 
-/******************************** Set variable ********************************/
-// Please set session and trial num.
-const int SessionNum = 2;
-const int TrialNum = 15;
-
-// Please set stimulation pattern.
-const int OdorPattern[SessionNum][TrialNum] = { 
-  {Air, Odor1, Odor2, Odor1, Air, Odor2, Air, Odor2, Odor1, 
-   Air, Odor1, Odor2, Air, Odor1, Odor2},  //Session1
-  {Odor1, Air, Odor2, Odor2, Air, Odor1, Air, Odor1, Odor2, 
-   Air, Odor2, Air, Odor1, Odor2, Odor1}   //Session2
-};
-
 /******************************************************************************/
-
 int i = 0;
-int odorType;
-int sessionCounter = 0;
-int trialCounter = 0;
-int mriPulseCounter = 0;
-boolean trialFlag = true; // ニオイ提示前はtrue，提示したらfalse
-boolean checkFlag;
+boolean checkFlag = false;
 
 // Function prototype
-void dummyScan(boolean); // Dummy scan (10000 msec)
-void initialRest(long); // Rest for the first time (long msec)
-void questionnaire(); // Questionnaire (24000 msec)
-void fillUpOdor(int, long); // rest and fill up odor (long msec)
-void odorTrial(int, long); // Odor trial (long msec)
-void rest(long); // Rest (long msec)
-void sincPulse(); // Send Arduino pulse (100 msec)
+void questionnaire(); // Questionnaire (24000 ms)
+void fillUpOdor(int, long); // rest and fill up odor (long ms)
+void odorTrial(int, long, boolean); // Odor trial (long ms)
+void sincPulse(); // Send Arduino pulse (100 ms)
 
 
 /*********************************** setup ************************************/
@@ -98,34 +84,28 @@ void loop() {
 
     switch(Serial.read()){
       case 'p':
-        Serial.print('p');
-        delay(50);
         
-        fillUpOdor(Odor1, 1000); // long msec
-        odorTrial(Odor1, 5000); // long msec
-        rest(1000); // long msec
+        fillUpOdor(Odor1, 6000); // long ms
+        odorTrial(Odor1, 15000, true); // long ms
+        questionnaire(); // long ms
 
         checkFlag = true;
         break;
         
       case 'u':
-        Serial.print('u');
-        delay(50);
         
-        fillUpOdor(Odor2, 1000); // long msec
-        odorTrial(Odor2, 5000); // long msec
-        rest(1000); // long msec
+        fillUpOdor(Odor2, 6000); // long ms
+        odorTrial(Odor2, 15000, true); // long ms
+        questionnaire(); // long ms
         
         checkFlag = true;
         break;
         
       case 'n':
-        Serial.print('n');
-        delay(50);
         
-        fillUpOdor(Air, 1000); // long msec
-        odorTrial(Air, 5000); // long msec
-        rest(1000); // long msec
+        fillUpOdor(Air, 6000); // long ms
+        odorTrial(Air, 15000, true); // long ms
+        questionnaire(); // long ms
         
         checkFlag = true;
         break;
@@ -139,152 +119,140 @@ void loop() {
 
 /******************************* define function ******************************/
 
-// Dummy scan (10000 msec)
-void dummyScan(boolean isMRIexperiment) {
-  Serial.print('f'); // dummy scan display
-  
-  if(isMRIexperiment == true) {
-    // @fMRI experiment
-    while(1){
-      if(digitalRead(MRIpulse) == HIGH && mriPulseCounter < 10){
-        mriPulseCounter++;
-        delay(500);
-
-      } else if(digitalRead(MRIpulse == HIGH && mriPulseCounter == 10)){
-        break;
-      
-      }
-    }
-    
-  }else{
-    // @Saijo
-    isCheck? delay(100): delay(10000);
-    
-  }
-}
-
-
-// Rest for the first time (long(restTime) msec)
-void initialRest(long restTime) {
-  Serial.print('a'); // initial rest display
-  
-  sincPulse(); // 100 msec
-  isCheck? delay(100): delay(restTime - 100);
-
-}
-
-
-// Questionnaire (24000 msec)
+// Questionnaire (24000 ms)
 void questionnaire() {
-  Serial.print('g'); // starting questionnaire display
-  sincPulse(); // 100 msec
+  Serial.print('x'); // starting questionnaire display
+  sincPulse(); // 100 ms
   isCheck? delay(50): delay(3900);
-  
+
   for(i=0;i<5;i++){
-    Serial.print('h'); // question display
+    Serial.print('y'); // question display
     isCheck? delay(100): delay(3900);
-    
-    Serial.print('i'); // record question result signal
+
+    Serial.print('z'); // record question result signal
     delay(100); // debounce
   }
 }
 
 
-// rest and fill up odor (long(restTime) msec)
+// rest and fill up odor (long(restTime) ms, restTime>2000)
 // With odor presentation task, AirPin is closed and OdorPin is opened.
 void fillUpOdor(int odorType, long restTime) {
-  //Serial.print('b'); // odor screen
-  sincPulse(); // 100 msec
-  
+  Serial.print('b'); // odor screen
+  sincPulse(); // 100 ms
+
   if(odorType == Air) {
     delay(restTime - 100);
 
   } else {
+    delay(restTime-2200);
     digitalWrite(Air, LOW);
     delay(100);
     digitalWrite(odorType, HIGH); // fill up odor
-    delay(restTime - 200);
-  
+    delay(2000);
+
   }
 }
 
 
-// Odor presentation (2000 msec)
+// Odor presentation (1000 ms)
 void stimulation(int odorType) {
 
-  /*
-  if(odorType == Odor1) {
-    Serial.print('p'); // preasant odor display
-  } else {
-    Serial.print('u'); // unpreasant odor display
-  }
-  */
-  
   delay(20);
   digitalWrite(SwitchingPin, HIGH);
   delay(20);
   digitalWrite(SincPin, HIGH);
-  delay(1900);
+  delay(940);
   digitalWrite(SincPin, LOW);
   delay(20);
   digitalWrite(SwitchingPin, LOW);
-  delay(20);
-  digitalWrite(odorType, LOW);
-  delay(20);
-  digitalWrite(Air, HIGH);
-  
+
 }
 
 
-// Odor trial (long(trialTime) msec)
+// Odor trial (long(trialTime) ms)
 // Last of this func, OdorPin is closed and AirPin is opened.
-void odorTrial(int odorType, long trialTime) {
+void odorTrial(int odorType, long trialTime, boolean breathFlag) {
   if(odorType == Air){
     // don't stimulation.
-    //Serial.print('n'); // odorless air display
+    Serial.print('n'); // odorless air display
     digitalWrite(SincPin, HIGH);
     delay(trialTime - 50);
     digitalWrite(SincPin, LOW);
     delay(50);
-    
+
   } else {
+      if(odorType == Odor1) {
+        switch (Odor1Type) {
+          case 'p':
+            Serial.print('p'); // lactone display
+            break;
+          
+          case 'o':
+            Serial.print('o'); // PEA display
+            break;
+          
+          case 'i':
+            Serial.print('i'); // sycroten display
+            break;
     
-    i = 0;
-    trialFlag = true;
-    while(1){
-      
-      if(digitalRead(BreathPulse) == HIGH && i < ((trialTime-2000)/10) && trialFlag){
-        // When catch the breath pulse
-        trialFlag = false;
-        stimulation(odorType); // 2000 msec
-        
-      } else if(i == ((trialTime-2000)/10) && trialFlag) {
-        // If arduino don't catch the breath pulse
-        trialFlag = false;
-        stimulation(odorType); // 2000 msec
-        
+          default:
+            break;
+        }
+      } else {
+        switch (Odor2Type) {
+          case 'q':
+            Serial.print('q'); // heptanal display
+            break;
+          
+          case 'w':
+          Serial.print('w'); // tri methyl benzene display
+          break;
+    
+          default:
+            break;
+        }
       }
-      
-      if(i == ((trialTime-2000)/10)){
-        // Finish stimulate odor trial
-        break;
+
+    if(breathFlag == true) {
+      i = 0;
+      int i_stimNum = 0;
+
+      while(1){
+        if(digitalRead(BreathPulse) == HIGH && i < ((trialTime-1000)/10)) {
+          // When catch the breath pulse
+          stimulation(odorType); // 1000 ms
+          i_stimNum++;
+        }
+
+        if(i >= ((trialTime-i_stimNum*1000-40)/10)){
+          // Finish stimulate odor trial
+          delay(20);
+          digitalWrite(odorType, LOW);
+          delay(20);
+          digitalWrite(Air, HIGH);
+          break;
+        }
+
+        i++;
+        delay(10);
       }
-      
-      i++;
-      delay(10);
+    } else {
+      for(int i = 0; i < 4; i++) {
+        stimulation(odorType); // stimulation 1000 ms
+        delay(2000); // rest 2000 ms
+      }
+      stimulation(odorType); // stimulation 1000 ms
+      delay(1980);
+      digitalWrite(odorType, LOW);
+      delay(20);
+      digitalWrite(Air, HIGH);
     }
   }
 }
 
 
-// Rest (long(restTime) msec)
-void rest(long restTime) {
-  Serial.print('b'); // rest display
-  sincPulse(); // 100 msec
-  delay(restTime - 100);
-}
-
-// Send Arduino pulse (100 msec)
+// Send Arduino pulse (100 ms)
 void sincPulse() {
   digitalWrite(SincPin,HIGH);
   delay(50);
