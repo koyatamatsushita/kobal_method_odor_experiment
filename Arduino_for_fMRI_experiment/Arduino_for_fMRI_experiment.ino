@@ -2,6 +2,8 @@
 2020.02.20 @ author : Koyata Matsushita
 2020.07.07 edited
     プロトコルを変更，安静時ニオイパルスチェックを導入
+2020.07.10 added
+    プレ実験の提示順を追加
 
 For fMRI experiment.
 
@@ -40,15 +42,51 @@ const int TrialNum = 4;
 
 // Please set stimulation pattern.
 const int OdorPattern[SessionNum][RunNum][TrialNum] = {
-  { {Air, Odor1, Odor2, Odor1},
-    {Air, Odor2, Air, Odor2},
+  // Sub.A 1回目
+  { {Odor1, Air, Odor1, Odor2},
+    {Odor1, Air, Air, Odor2},
+    {Odor2, Odor1, Air, Odor2} },// session1
+  { {Air, Odor2, Air, Odor1},
+    {Odor1, Odor2, Odor2, Air},
+    {Air, Odor1, Odor2, Odor1} },//session2
+  { {Air, Odor1, Odor2, Air},
+    {Odor2, Odor1, Odor1, Air},
+    {Odor1, Odor2, Air, Odor2} }//session3
+
+  /*
+  // Sub.A 2回目
+  { {Odor2, Air, Odor2, Odor1},
+    {Odor1, Air, Air, Odor2},
+    {Odor1, Odor2, Air, Odor1} },// session1
+  { {Odor1, Odor2, Odor1, Air},
+    {Odor1, Odor2, Odor2, Air},
+    {Odor1, Air, Odor2, Air} },//session2
+  { {Odor2, Air, Odor1, Odor2},
+    {Odor2, Odor1, Odor1, Air},
+    {Odor2, Air, Odor1, Air} }//session3
+
+  // Sub.B 1回目
+  { {Odor1, Odor2, Air, Odor1},
+    {Odor1, Air, Air, Odor2},
+    {Odor2, Air, Odor2, Odor1} },// session1
+  { {Odor1, Air, Odor2, Air},
+    {Odor1, Odor2, Odor2, Air},
+    {Odor1, Odor2, Odor1, Air} },//session2
+  { {Air, Odor2, Odor1, Air},
+    {Odor2, Odor1, Odor1, Air},
+    {Odor2, Air, Odor1, Odor2} }//session3
+
+  // Sub.B 2回目
+  { {Odor2, Odor1, Air, Odor2},
+    {Odor1, Air, Air, Odor2},
     {Odor1, Air, Odor1, Odor2} },// session1
   { {Air, Odor1, Odor2, Odor1},
-    {Air, Odor2, Odor2, Air},
-    {Odor1, Air, Odor1, Odor2} },//session2
-  { {Air, Odor2, Air, Odor1},
+    {Odor1, Odor2, Odor2, Air},
+    {Air, Odor2, Air, Odor1} },//session2
+  { {Odor1, Odor2, Air, Odor2},
     {Odor2, Odor1, Odor1, Air},
-    {Air, Odor2, Odor1, Odor2} }//session3
+    {Air, Odor1, Odor2, Air} }//session3
+  */
 };
 
 /******************************************************************************/
