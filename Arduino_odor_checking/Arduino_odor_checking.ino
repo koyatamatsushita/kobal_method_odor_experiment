@@ -21,7 +21,7 @@ boolean isMRIexperiment = false;
 
 // Select odor combination
 // [Odor1Type] lactone: p, PEA: o, sycroten: i
-char Odor1Type = 'p';
+char Odor1Type = 'w';
 // [Odor2Type] heptanal: q, benzene: w
 char Odor2Type = 'q';
 
@@ -193,7 +193,11 @@ void odorTrial(int odorType, long trialTime, boolean breathFlag) {
             break;
           
           case 'i':
-            Serial.print('i'); // sycroten display
+            Serial.print('i'); // cycroten display
+            break;
+
+          case 'w':
+            Serial.print('w'); // benzene display
             break;
     
           default:
