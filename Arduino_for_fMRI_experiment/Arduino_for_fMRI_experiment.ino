@@ -17,7 +17,7 @@ SvmePin is always opened through experiment by toggle switch.
 /******************************************************************************/
 // When you want to check device action, set isCheck true.
 // If isCheck is true, skip dummyScan, initialRest and questionnaire.
-boolean isCheck = true;
+boolean isCheck = false;
 
 // If fMRI experiment, then true. @Saijo, then false.
 boolean isMRIexperiment = false;
