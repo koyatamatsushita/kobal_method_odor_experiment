@@ -22,10 +22,10 @@ void setup() {
   question = new Questionnaire();
   
   // シリアルポートの設定
-  port = new Serial(this,"COM4", 9600); //Arduino>ツール＞ボードから要確認！  
+  port = new Serial(this,"COM3", 9600); //Arduino>ツール＞ボードから要確認！  
   
   // 画面の初期設定
-  size(1950,1050);
+  size(2150,1150);
   colorMode(RGB,256);
   background(0,0,0);
   frameRate(1000); 

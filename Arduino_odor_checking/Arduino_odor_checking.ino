@@ -19,11 +19,13 @@ boolean isCheck = false;
 // If fMRI experiment, then true. @Saijo, then false.
 boolean isMRIexperiment = false;
 
+boolean isBreath = true;
+
 // Select odor combination
 // [Odor1Type] lactone: p, PEA: o, sycroten: i
 char Odor1Type = 'i';
 // [Odor2Type] heptanal: q, benzene: w
-char Odor2Type = 'q';
+char Odor2Type = 'w';
 
 /******************************* Set pin Number *******************************/
 // !caution!
@@ -86,7 +88,7 @@ void loop() {
       case 'p':
         
         fillUpOdor(Odor1, 6000); // long ms
-        odorTrial(Odor1, 15000, true); // long ms
+        odorTrial(Odor1, 15000, isBreath); // long ms
         questionnaire(); // long ms
 
         checkFlag = true;
@@ -95,7 +97,7 @@ void loop() {
       case 'u':
         
         fillUpOdor(Odor2, 6000); // long ms
-        odorTrial(Odor2, 15000, true); // long ms
+        odorTrial(Odor2, 15000, isBreath); // long ms
         questionnaire(); // long ms
         
         checkFlag = true;
@@ -103,8 +105,8 @@ void loop() {
         
       case 'n':
         
-        fillUpOdor(Air, 6000); // long ms
-        odorTrial(Air, 15000, true); // long ms
+        fillUpOdor(Air, 1000); // long ms
+        odorTrial(Air, 2000, isBreath); // long ms
         questionnaire(); // long ms
         
         checkFlag = true;

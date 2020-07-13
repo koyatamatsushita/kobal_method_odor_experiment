@@ -1,0 +1,7 @@
+No,Stimulation,Intensity,Kassei,Hikassei,Kai,Fukai
+0,FIRSTQUESTION
+1,Odorless,50.0,50.0,50.0,50.0,50.0
+0,FIRSTQUESTION
+2,Rose,50.0,50.0,50.0,50.0,50.0
+0,FIRSTQUESTION
+3,Gasoline,50.0,50.0,50.0,50.0,50.0

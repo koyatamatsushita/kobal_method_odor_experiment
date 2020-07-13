@@ -42,6 +42,7 @@ const int TrialNum = 4;
 
 // Please set stimulation pattern.
 const int OdorPattern[SessionNum][RunNum][TrialNum] = {
+  /*
   // Sub.A 1回目
   { {Odor1, Air, Odor1, Odor2},
     {Odor1, Air, Air, Odor2},
@@ -52,8 +53,8 @@ const int OdorPattern[SessionNum][RunNum][TrialNum] = {
   { {Air, Odor1, Odor2, Air},
     {Odor2, Odor1, Odor1, Air},
     {Odor1, Odor2, Air, Odor2} }//session3
-
-  /*
+  
+  
   // Sub.A 2回目
   { {Odor2, Air, Odor2, Odor1},
     {Odor1, Air, Air, Odor2},
@@ -64,7 +65,8 @@ const int OdorPattern[SessionNum][RunNum][TrialNum] = {
   { {Odor2, Air, Odor1, Odor2},
     {Odor2, Odor1, Odor1, Air},
     {Odor2, Air, Odor1, Air} }//session3
-
+  
+  
   // Sub.B 1回目
   { {Odor1, Odor2, Air, Odor1},
     {Odor1, Air, Air, Odor2},
@@ -75,7 +77,7 @@ const int OdorPattern[SessionNum][RunNum][TrialNum] = {
   { {Air, Odor2, Odor1, Air},
     {Odor2, Odor1, Odor1, Air},
     {Odor2, Air, Odor1, Odor2} }//session3
-
+  */
   // Sub.B 2回目
   { {Odor2, Odor1, Air, Odor2},
     {Odor1, Air, Air, Odor2},
@@ -86,7 +88,7 @@ const int OdorPattern[SessionNum][RunNum][TrialNum] = {
   { {Odor1, Odor2, Air, Odor2},
     {Odor2, Odor1, Odor1, Air},
     {Air, Odor1, Odor2, Air} }//session3
-  */
+  
 };
 
 /******************************************************************************/
