@@ -23,9 +23,9 @@ boolean isBreath = true;
 
 // Select odor combination
 // [Odor1Type] lactone: p, PEA: o, sycroten: i
-char Odor1Type = 'i';
+char Odor1Type = 'o';
 // [Odor2Type] heptanal: q, benzene: w
-char Odor2Type = 'w';
+char Odor2Type = 'q';
 
 /******************************* Set pin Number *******************************/
 // !caution!
