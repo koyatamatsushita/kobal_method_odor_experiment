@@ -196,7 +196,9 @@ void loop() {
       initialRest(15000);
 
       Serial.print('j'); // session interval
-      if(sessionCounter<=1){
+      sincPulse();
+
+      if(sessionCounter<2){
         while(1) {
           if(Serial.read()=='a'){
             break;
