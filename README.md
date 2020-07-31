@@ -6,6 +6,6 @@
 * for_fMRI_experiment is used for main experiment.
 * odor_checking is used for odor threshold checking.
 
-## 2020.07.09 edited
-* 新しいプロトコルに沿うように変更
-* ニオイチェックのプログラムをニオイ種類に合わせて変更
+## 2020.07.31 edited
+* アンケートを減らしたプロトコルのプログラム．
+* ショートランの論文をベースに作成．
