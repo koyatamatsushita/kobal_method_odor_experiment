@@ -4,6 +4,8 @@
     プロトコルを変更，安静時ニオイパルスチェックを導入
 2020.07.10 added
     プレ実験の提示順を追加
+2020.07.31 edited
+    アンケートを減らしたプロトコルのプログラム．
 
 For fMRI experiment.
 
@@ -17,7 +19,7 @@ SvmePin is always opened through experiment by toggle switch.
 /******************************************************************************/
 // When you want to check device action, set isCheck true.
 // If isCheck is true, skip dummyScan, initialRest and questionnaire.
-boolean isCheck = false;
+boolean isCheck = true;
 
 // If fMRI experiment, then true. @Saijo, then false.
 boolean isMRIexperiment = false;
@@ -38,57 +40,20 @@ boolean isMRIexperiment = false;
 // Please set session and trial num.
 const int SessionNum = 3;
 const int RunNum = 3;
-const int TrialNum = 4;
+const int BlockNum = 3;
 
 // Please set stimulation pattern.
-const int OdorPattern[SessionNum][RunNum][TrialNum] = {
-  /*
-  // Sub.A 1回目
-  { {Odor1, Air, Odor1, Odor2},
-    {Odor1, Air, Air, Odor2},
-    {Odor2, Odor1, Air, Odor2} },// session1
-  { {Air, Odor2, Air, Odor1},
-    {Odor1, Odor2, Odor2, Air},
-    {Air, Odor1, Odor2, Odor1} },//session2
-  { {Air, Odor1, Odor2, Air},
-    {Odor2, Odor1, Odor1, Air},
-    {Odor1, Odor2, Air, Odor2} }//session3
-  
-  
-  // Sub.A 2回目
-  { {Odor2, Air, Odor2, Odor1},
-    {Odor1, Air, Air, Odor2},
-    {Odor1, Odor2, Air, Odor1} },// session1
-  { {Odor1, Odor2, Odor1, Air},
-    {Odor1, Odor2, Odor2, Air},
-    {Odor1, Air, Odor2, Air} },//session2
-  { {Odor2, Air, Odor1, Odor2},
-    {Odor2, Odor1, Odor1, Air},
-    {Odor2, Air, Odor1, Air} }//session3
-  
-  
-  // Sub.B 1回目
-  { {Odor1, Odor2, Air, Odor1},
-    {Odor1, Air, Air, Odor2},
-    {Odor2, Air, Odor2, Odor1} },// session1
-  { {Odor1, Air, Odor2, Air},
-    {Odor1, Odor2, Odor2, Air},
-    {Odor1, Odor2, Odor1, Air} },//session2
-  { {Air, Odor2, Odor1, Air},
-    {Odor2, Odor1, Odor1, Air},
-    {Odor2, Air, Odor1, Odor2} }//session3
-  */
-  // Sub.B 2回目
-  { {Odor2, Odor1, Air, Odor2},
-    {Odor1, Air, Air, Odor2},
-    {Odor1, Air, Odor1, Odor2} },// session1
-  { {Air, Odor1, Odor2, Odor1},
-    {Odor1, Odor2, Odor2, Air},
-    {Air, Odor2, Air, Odor1} },//session2
-  { {Odor1, Odor2, Air, Odor2},
-    {Odor2, Odor1, Odor1, Air},
-    {Air, Odor1, Odor2, Air} }//session3
-  
+const int OdorPattern[SessionNum][RunNum][BlockNum] = {
+  // Sub.A
+  { {Odor1, Odor1, Odor1},
+    {Air, Air, Air},
+    {Odor2, Odor2, Odor2} },// session1
+  { {Air, Air, Air},
+    {Odor2, Odor2, Odor2},
+    {Odor1, Odor1, Odor1} },//session2
+  { {Odor2, Odor2, Odor2},
+    {Odor1, Odor1, Odor1},
+    {Air, Air, Air} }//session3
 };
 
 /******************************************************************************/
@@ -96,7 +61,7 @@ const int OdorPattern[SessionNum][RunNum][TrialNum] = {
 int i = 0;
 int odorType;
 int sessionCounter = 0;
-int trialCounter = 0;
+int blockCounter = 0;
 int runCounter = 0;
 //int mriPulseCounter = 0;
 boolean breathFlag; // exist breath pulse or not
@@ -106,7 +71,7 @@ void dummyScan(boolean); // Dummy scan (10000 ms)
 boolean initialRest(long); // Rest for the first time (long ms)
 void questionnaire(); // Questionnaire (24000 ms)
 void fillUpOdor(int, long); // rest and fill up odor (long ms)
-void odorTrial(int, long, boolean); // Odor trial (long ms)
+void odorBlock(int, long, boolean); // Odor trial (long ms)
 void rest(long); // Rest (long ms)
 void sincPulse(); // Send Arduino pulse (100 ms)
 
@@ -177,20 +142,18 @@ void loop() {
 
       for(runCounter=0; runCounter<RunNum; runCounter++){
 
-        breathFlag = initialRest(15000); // long ms
+        breathFlag = initialRest(15000); // Rest
 
         questionnaire(); // initial questionnaire task for 24000 ms
 
         // rest + odor trial + questionnaire
-        for(trialCounter=0; trialCounter<TrialNum; trialCounter++){
-          odorType = OdorPattern[sessionCounter][runCounter][trialCounter];
+        for(blockCounter=0; blockCounter<BlockNum; blockCounter++){
+          odorType = OdorPattern[sessionCounter][runCounter][blockCounter];
 
-          fillUpOdor(odorType, 6000); // long ms
+          odorBlock(odorType, 20000, breathFlag); // long ms + Air Block 20000 ms
 
-          odorTrial(odorType, 15000, breathFlag); // long ms
-
-          questionnaire(); // questionnaire 24000 ms
         }
+        questionnaire(); // questionnaire 24000 ms
       }
 
       initialRest(15000);
@@ -261,22 +224,23 @@ boolean initialRest(long restTime) {
   sincPulse(); // 100 ms
 
   boolean breathFlag = false;
-  int i = 0;
+  // int i = 0;
 
-  while(1) {
-    if(digitalRead(BreathPulse) == HIGH && breathFlag == false) {
-      breathFlag = true;
-      delay(100);
-    }
+  // while(1) {
+  //   if(digitalRead(BreathPulse) == HIGH && breathFlag == false) {
+  //     breathFlag = true;
+  //     delay(100);
+  //   }
 
-    delay(10);
-    i++;
+  //   delay(10);
+  //   i++;
 
-    if(i == ((restTime-200)/10)) {
-      // Finish stimulate odor trial
-      break;
-    }
-  }
+  //   if(i == ((restTime-200)/10)) {
+  //     // Finish stimulate odor trial
+  //     break;
+  //   }
+  // }
+  delay(restTime - 100);
 
   return breathFlag;
 }
@@ -308,17 +272,17 @@ void fillUpOdor(int odorType, long restTime) {
     delay(restTime - 100);
 
   } else {
-    delay(restTime-2200);
+    // delay(restTime-2200);
     digitalWrite(Air, LOW);
     delay(100);
     digitalWrite(odorType, HIGH); // fill up odor
-    delay(2000);
+    delay(restTime-200);
 
   }
 }
 
 
-// Odor presentation (1000 ms)
+// Odor presentation (2000 ms)
 void stimulation(int odorType) {
 
   if(odorType == Odor1) {
@@ -331,7 +295,7 @@ void stimulation(int odorType) {
   digitalWrite(SwitchingPin, HIGH);
   delay(20);
   digitalWrite(SincPin, HIGH);
-  delay(940);
+  delay(1940);
   digitalWrite(SincPin, LOW);
   delay(20);
   digitalWrite(SwitchingPin, LOW);
@@ -341,7 +305,7 @@ void stimulation(int odorType) {
 
 // Odor trial (long(trialTime) ms)
 // Last of this func, OdorPin is closed and AirPin is opened.
-void odorTrial(int odorType, long trialTime, boolean breathFlag) {
+void odorBlock(int odorType, long trialTime, boolean breathFlag) {
   if(odorType == Air){
     // don't stimulation.
     Serial.print('n'); // odorless air display
@@ -351,41 +315,17 @@ void odorTrial(int odorType, long trialTime, boolean breathFlag) {
     delay(50);
 
   } else {
-    if(breathFlag == true) {
-      i = 0;
-      int i_stimNum = 0;
-
-      while(1){
-        if(digitalRead(BreathPulse) == HIGH && i < ((trialTime-1000)/10)) {
-          // When catch the breath pulse
-          stimulation(odorType); // 1000 ms
-          i_stimNum++;
-        }
-
-        if(i >= ((trialTime-i_stimNum*1000-40)/10)){
-          // Finish stimulate odor trial
-          delay(20);
-          digitalWrite(odorType, LOW);
-          delay(20);
-          digitalWrite(Air, HIGH);
-          break;
-        }
-
-        i++;
-        delay(10);
-      }
-    } else {
-      for(int i = 0; i < 4; i++) {
-        stimulation(odorType); // stimulation 1000 ms
-        delay(2000); // rest 2000 ms
-      }
-      stimulation(odorType); // stimulation 1000 ms
-      delay(1980);
-      digitalWrite(odorType, LOW);
-      delay(20);
-      digitalWrite(Air, HIGH);
+    fillUpOdor(odorType, 2000);
+    for(int i = 0; i < 4; i++) {
+      delay(2000); // rest 2000 ms
+      stimulation(odorType); // stimulation 2000 ms
     }
+    delay(1980);
+    digitalWrite(odorType, LOW);
+    delay(20);
+    digitalWrite(Air, HIGH);
   }
+  delay(20000); // Air Block
 }
 
 // Rest (long(restTime) ms)

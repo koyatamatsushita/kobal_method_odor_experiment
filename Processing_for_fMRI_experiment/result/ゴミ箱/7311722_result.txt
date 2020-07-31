@@ -1,0 +1,10 @@
+No,Stimulation,Intensity,Kassei,Hikassei,Kai,Fukai
+0,FIRSTQUESTION
+1,Odorless,49.75,20.5,71.75,79.5,52.75
+2,Pleasant,50.0,50.0,50.0,50.0,50.0
+0,FIRSTQUESTION
+3,Pleasant,50.0,50.0,50.0,50.0,50.0
+4,Odorless,50.0,50.0,50.0,50.0,50.0
+0,FIRSTQUESTION
+5,Odorless,50.0,50.0,50.0,50.0,50.0
+6,Unpleasant,50.0,50.0,50.0,50.0,50.0

@@ -1,7 +1,9 @@
 /*
-2020.02
+2020.07
 快不快実験用
 ニオイ種類はAir, Odor1, Odor2
+
+アンケート記録タイミングの修正
 */
 
 import processing.serial.*;//シリアルライブラリを取り入れる
@@ -11,6 +13,7 @@ Questionnaire question;
 
 int session = 1;//タスク番号
 int task = 1;//刺激番号
+int odorType = 0; // 0:First, 1:Air, 2:Odor1, 3:Odor2
 boolean pointerFlag = false;
 
 PrintWriter output;  // PrintWriter オブジェクトを格納する変数
@@ -22,7 +25,7 @@ void setup() {
   question = new Questionnaire();
   
   // シリアルポートの設定
-  port = new Serial(this,"COM3", 9600); //Arduino>ツール＞ボードから要確認！  
+  port = new Serial(this,"COM4", 9600); //Arduino>ツール＞ボードから要確認！  
   
   // 画面の初期設定
   size(2150,1150);
@@ -62,12 +65,13 @@ void draw() {
       rect(width/2,height/2,120,20);
       
       output.print("\n0,FIRSTQUESTION");
+      odorType = 0;
       port.clear();
       break;
 
     // 安静
     case 'b':
-      println("\nニオイ提示前...\n");
+      println("\nニオイ提示前...");
       question.darkScreen();
       fill(255);
       noStroke();
@@ -80,7 +84,7 @@ void draw() {
 
     // 無臭
     case 'n':
-      println("無臭 15sec");
+      println("\n無臭 20s...");
       
       question.darkScreen();
       fill(255);
@@ -88,15 +92,14 @@ void draw() {
       rectMode(CENTER);
       rect(width/2,height/2,20,120);
       rect(width/2,height/2,120,20);
-      
-      output.print("\n" + task + ",Odorless");
+
+      odorType = 1;
       port.clear();
-      task++;
       break;
 
     // 快臭
     case 'p':
-      println("快臭提示 1sec...");
+      println("快臭提示 2s...");
       
       question.darkScreen();
       fill(255);
@@ -105,14 +108,13 @@ void draw() {
       rect(width/2,height/2,20,120);
       rect(width/2,height/2,120,20);
       
-      output.print("\n" + task + ",Pleasant");
+      odorType = 2;
       port.clear();
-      task++;
       break;
     
     // 不快臭
     case 'u':
-      println("不快臭提示 1sec...");
+      println("不快臭提示 2s...");
       
       question.darkScreen();
       fill(255);
@@ -121,9 +123,8 @@ void draw() {
       rect(width/2,height/2,20,120);
       rect(width/2,height/2,120,20);
       
-      output.print("\n" + task + ",Unpleasant");
+      odorType = 3;
       port.clear();
-      task++;
       break;
     
       
@@ -186,6 +187,16 @@ void draw() {
       text("アンケートを始めます",width/2,height/3);
       text("赤文字の項目について回答してください",width/2,height/3+60);
       
+      if(odorType == 1) {
+        output.print("\n" + task + ",Odorless");
+        task++;
+      } else if (odorType == 2) {
+        output.print("\n" + task + ",Pleasant");
+        task++;
+      } else if (odorType == 3) {
+        output.print("\n" + task + ",Unpleasant");
+        task++;
+      }
       port.clear();
       break;
       
