@@ -22,8 +22,8 @@ boolean isMRIexperiment = false;
 boolean isBreath = true;
 
 // Select odor combination
-// [Odor1Type] lactone: p, PEA: o, sycroten: i
-char Odor1Type = 'o';
+// [Odor1Type] lactone: p, PEA: o, cycroten: i
+char Odor1Type = 'i';
 // [Odor2Type] heptanal: q, benzene: w
 char Odor2Type = 'q';
 
