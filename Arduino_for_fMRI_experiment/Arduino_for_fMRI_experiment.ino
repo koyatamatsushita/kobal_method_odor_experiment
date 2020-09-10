@@ -211,7 +211,7 @@ void dummyScan(boolean isMRIexperiment) {
       if(digitalRead(MRIpulse) == HIGH && mriPulseCounter < 10) {
         mriPulseCounter++;
         Serial.print('y'); // test
-        delay(500);
+        delay(750);
 
       } else if(digitalRead(MRIpulse) == HIGH && mriPulseCounter == 10) {
         //Serial.print('y');
