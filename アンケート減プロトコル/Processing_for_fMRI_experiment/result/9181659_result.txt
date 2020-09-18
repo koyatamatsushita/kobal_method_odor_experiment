@@ -1,0 +1,2 @@
+No,Stimulation,Intensity,Kassei,Hikassei,Kai,Fukai,50.0
+0,FIRSTQUESTION,50.0,50.0,50.0,50.0,50.0,50.0

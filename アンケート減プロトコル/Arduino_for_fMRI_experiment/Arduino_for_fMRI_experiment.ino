@@ -19,7 +19,7 @@ SvmePin is always opened through experiment by toggle switch.
 /******************************************************************************/
 // When you want to check device action, set isCheck true.
 // If isCheck is true, skip dummyScan, initialRest and questionnaire.
-boolean isCheck = false;
+boolean isCheck = true;
 
 // If fMRI experiment, then true. @Saijo, then false.
 boolean isMRIexperiment = false;
@@ -236,22 +236,7 @@ boolean initialRest(long restTime) {
   sincPulse(); // 100 ms
 
   boolean breathFlag = false;
-  // int i = 0;
-
-  // while(1) {
-  //   if(digitalRead(BreathPulse) == HIGH && breathFlag == false) {
-  //     breathFlag = true;
-  //     delay(100);
-  //   }
-
-  //   delay(10);
-  //   i++;
-
-  //   if(i == ((restTime-200)/10)) {
-  //     // Finish stimulate odor trial
-  //     break;
-  //   }
-  // }
+  
   delay(restTime - 100);
 
   return breathFlag;
@@ -264,7 +249,7 @@ void questionnaire() {
   sincPulse(); // 100 ms
   isCheck? delay(50): delay(3900);
 
-  for(i=0;i<5;i++){
+  for(i=0;i<6;i++){
     Serial.print('h'); // question display
     isCheck? delay(100): delay(3900);
 
