@@ -19,7 +19,7 @@ SvmePin is always opened through experiment by toggle switch.
 /******************************************************************************/
 // When you want to check device action, set isCheck true.
 // If isCheck is true, skip dummyScan, initialRest and questionnaire.
-boolean isCheck = true;
+boolean isCheck = false;
 
 // If fMRI experiment, then true. @Saijo, then false.
 boolean isMRIexperiment = false;
@@ -44,22 +44,10 @@ const int BlockNum = 3;
 
 // Please set stimulation pattern.
 const int OdorPattern[SessionNum][RunNum][BlockNum] = {
-  /*
-  // Sub.B(Chen)
+  // Sub.A(Akiyoshi)
   { {Odor1, Odor1, Odor1},
     {Air, Air, Air},
     {Odor2, Odor2, Odor2} },// session1
-  { {Air, Air, Air},
-    {Odor2, Odor2, Odor2},
-    {Odor1, Odor1, Odor1} },//session2
-  { {Odor2, Odor2, Odor2},
-    {Odor1, Odor1, Odor1},
-    {Air, Air, Air} }//session3
-  */
-  // Sub.A(Akiyoshi)
-  { {Odor2, Odor2, Odor2},
-    {Air, Air, Air},
-    {Odor1, Odor1, Odor1} },// session1
   { {Air, Air, Air},
     {Odor1, Odor1, Odor1},
     {Odor2, Odor2, Odor2} },//session2
