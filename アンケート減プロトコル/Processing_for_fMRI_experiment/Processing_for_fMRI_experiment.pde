@@ -191,10 +191,10 @@ void draw() {
         output.print("\n" + task + ",Odorless");
         task++;
       } else if (odorType == 2) {
-        output.print("\n" + task + ",Pleasant");
+        output.print("\n" + task + ",Weak");
         task++;
       } else if (odorType == 3) {
-        output.print("\n" + task + ",Unpleasant");
+        output.print("\n" + task + ",Strong");
         task++;
       }
       port.clear();

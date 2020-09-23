@@ -292,7 +292,7 @@ void questionnaire() {
   sincPulse(); // 100 ms
   isCheck? delay(50): delay(3900);
 
-  for(i=0;i<5;i++){
+  for(i=0;i<6;i++){
     Serial.print('h'); // question display
     isCheck? delay(100): delay(3900);
 

@@ -41,7 +41,7 @@ void setup() {
   println("ENTERキーを押すと，実験を開始します\nsキーを押すとダイヤルチェックに入ります\n");
   
   // テキストファイルのタイトル行
-  output.print("No,Stimulation,Intensity,Kassei,Hikassei,Kai,Fukai");
+  output.print("No,Stimulation,Intensity,Kassei,Hikassei,Kai,Fukai,Type");
 }  
 
 
@@ -62,12 +62,13 @@ void draw() {
       rect(width/2,height/2,120,20);
       
       output.print("\n0,FIRSTQUESTION");
+      odorType = 0;
       port.clear();
       break;
 
     // 安静
     case 'b':
-      println("\nニオイ提示前...\n");
+      println("\nニオイ提示前...");
       question.darkScreen();
       fill(255);
       noStroke();
@@ -80,7 +81,7 @@ void draw() {
 
     // 無臭
     case 'n':
-      println("無臭 15sec");
+      println("無臭 15s...");
       
       question.darkScreen();
       fill(255);
@@ -89,14 +90,13 @@ void draw() {
       rect(width/2,height/2,20,120);
       rect(width/2,height/2,120,20);
       
-      output.print("\n" + task + ",Odorless");
+      odorType = 1;
       port.clear();
-      task++;
       break;
 
     // 快臭
     case 'p':
-      println("快臭提示 1sec...");
+      println("快臭提示 1s...");
       
       question.darkScreen();
       fill(255);
@@ -105,9 +105,8 @@ void draw() {
       rect(width/2,height/2,20,120);
       rect(width/2,height/2,120,20);
       
-      output.print("\n" + task + ",Pleasant");
+      odorType = 2;
       port.clear();
-      task++;
       break;
     
     // 不快臭
@@ -121,9 +120,8 @@ void draw() {
       rect(width/2,height/2,20,120);
       rect(width/2,height/2,120,20);
       
-      output.print("\n" + task + ",Unpleasant");
+      odorType = 3;
       port.clear();
-      task++;
       break;
     
       
@@ -186,6 +184,16 @@ void draw() {
       text("アンケートを始めます",width/2,height/3);
       text("赤文字の項目について回答してください",width/2,height/3+60);
       
+      if(odorType == 1) {
+        output.print("\n" + task + ",Odorless");
+        task++;
+      } else if (odorType == 2) {
+        output.print("\n" + task + ",Weak");
+        task++;
+      } else if (odorType == 3) {
+        output.print("\n" + task + ",Strong");
+        task++;
+      }
       port.clear();
       break;
       
@@ -330,42 +338,49 @@ class Questionnaire{
     textSize(40);
     fill(255);
     
-    text("ニオイの強さ", width/3, height/3-100);
-    text("活性度", (width*2)/3, height/3-100);
-    text("非活性度", (width)/4, height/3);
-    text("快度", (width*2)/4, height/3);
-    text("不快度", (width*3)/4, height/3);
+    text("ニオイの強さ", width/4, height/3-100);
+    text("活性度", (width*2)/4, height/3-100);
+    text("非活性度", (width*3)/4, height/3-100);
+    text("快度", (width)/4, height/3);
+    text("不快度", (width*2)/4, height/3);
+    text("ニオイの質", (width*3)/4, height/3);
         
     fill(255,0,0);
     switch(questionNo){
       case 0:
-        text("ニオイの強さ", width/3, height/3-100);
-        text("________________", width/3, height/3-100);
+        text("ニオイの強さ", width/4, height/3-100);
+        text("________________", width/4, height/3-100);
         println("0. ニオイの強さ");
         break;
         
       case 1:
-        text("活性度", (width*2)/3, height/3-100);
-        text("__________", (width*2)/3, height/3-100);
+        text("活性度", (width*2)/4, height/3-100);
+        text("__________", (width*2)/4, height/3-100);
         println("1. 活性度");
         break;
         
       case 2:
-        text("非活性度", (width)/4, height/3);
-        text("____________", (width)/4, height/3);
+        text("非活性度", (width*3)/4, height/3-100);
+        text("____________", (width*3)/4, height/3-100);
         println("2. 非活性度");
         break;
         
       case 3:
-        text("快度", (width*2)/4, height/3);
-        text("________", (width*2)/4, height/3);
+        text("快度", (width)/4, height/3);
+        text("________", (width)/4, height/3);
         println("3. 快度");
         break;
         
       case 4:
-        text("不快度", (width*3)/4, height/3);
-        text("__________", (width*3)/4, height/3);
+        text("不快度", (width*2)/4, height/3);
+        text("__________", (width*2)/4, height/3);
         println("4. 不快度");
+        break;
+
+      case 5:
+        text("ニオイの質", (width*3)/4, height/3);
+        text("__________", (width*3)/4, height/3);
+        println("5．ニオイの質");
         break;
     }
     
@@ -402,7 +417,7 @@ class Questionnaire{
     println("結果: " +x);
     output.print(","+x);
         
-    if(questionNo < 4){
+    if(questionNo < 5){
       questionNo++;
     }else{
       questionNo = 0;
@@ -423,6 +438,7 @@ class Questionnaire{
   void setVasAxis(){
     textSize(40);
     rectMode(CENTER);
+    double parameter = (pointer - ((width/2)-500)) / 10;
     
     fill(0);
     rect(width/2, height*3/4, width, 150); 
@@ -439,5 +455,53 @@ class Questionnaire{
     // red bar
     fill(255,0,0);
     rect((int)pointer, height*3/4-20, 5, 30);
+    
+    // 選択項目
+    if(questionNo == 5){
+      fill(0);
+      text(0, (width/2)-500, height*3/4-20);
+      text(100, (width/2)+500, height*3/4-20); 
+      fill(255);
+      text("カラメル", (width/2)-400, height*3/4+50);
+      text("カビ", (width/2)-200, height*3/4+50);
+      text("魚", (width/2), height*3/4+50);
+      text("果実", (width/2)+200, height*3/4+50);
+      text("バラ", (width/2)+400, height*3/4+50);
+      rect((width/2)-300, height*3/4, 5, 20);
+      rect((width/2)+300, height*3/4, 5, 20);
+      rect((width/2)-100, height*3/4, 5, 20);
+      rect((width/2)+100, height*3/4, 5, 20);
+      
+      // 選択項目の赤色表示
+      fill(255,0,0);
+      if( 0 <= parameter && parameter < (((width/2)-300)-((width/2)-500))/10 ){
+        
+        text("カラメル", (width/2)-400, height*3/4+50);
+        
+      }else if( (((width/2)-300)-((width/2)-500))/10 <= parameter && parameter < (((width/2)-100)-((width/2)-500))/10 ){
+        
+        text("カビ", (width/2)-200, height*3/4+50);
+        
+      }else if( (((width/2)-100)-((width/2)-500))/10 <= parameter && parameter < (((width/2)+100)-((width/2)-500))/10 ){
+        
+        text("魚", (width/2), height*3/4+50);
+        
+      }else if( (((width/2)+100)-((width/2)-500))/10 <= parameter && parameter < (((width/2)+300)-((width/2)-500))/10 ){
+        
+        text("果実", (width/2)+200, height*3/4+50);
+        
+      }else{
+        
+        text("バラ", (width/2)+400, height*3/4+50);
+        
+      }
+    } else {
+      fill(0);
+      text("カラメル", (width/2)-400, height*3/4+50);
+      text("カビ", (width/2)-200, height*3/4+50);
+      text("魚", (width/2), height*3/4+50);
+      text("果実", (width/2)+200, height*3/4+50);
+      text("バラ", (width/2)+400, height*3/4+50);
+    }
   }
 }
