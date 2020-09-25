@@ -19,11 +19,11 @@ boolean isCheck = false;
 // If fMRI experiment, then true. @Saijo, then false.
 boolean isMRIexperiment = false;
 
-boolean isBreath = true;
+boolean isBreath = false;
 
 // Select odor combination
 // [Odor1Type] lactone: p, PEA: o, cycroten: i
-char Odor1Type = 'i';
+char Odor1Type = 'q';
 // [Odor2Type] heptanal: q, benzene: w
 char Odor2Type = 'q';
 
@@ -127,7 +127,7 @@ void questionnaire() {
   sincPulse(); // 100 ms
   isCheck? delay(50): delay(3900);
 
-  for(i=0;i<5;i++){
+  for(i=0;i<6;i++){
     Serial.print('y'); // question display
     isCheck? delay(100): delay(3900);
 
@@ -201,7 +201,11 @@ void odorTrial(int odorType, long trialTime, boolean breathFlag) {
           case 'w':
             Serial.print('w'); // benzene display
             break;
-    
+
+          case 'q':
+            Serial.print('q'); // heptanal display
+            break;
+          
           default:
             break;
         }

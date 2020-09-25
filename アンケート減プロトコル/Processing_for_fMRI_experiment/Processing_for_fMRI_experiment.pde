@@ -465,11 +465,11 @@ class Questionnaire{
       text(0, (width/2)-500, height*3/4-20);
       text(100, (width/2)+500, height*3/4-20); 
       fill(255);
-      text("カラメル", (width/2)-400, height*3/4+50);
-      text("カビ", (width/2)-200, height*3/4+50);
-      text("魚", (width/2), height*3/4+50);
+      text("ガソリン", (width/2)-400, height*3/4+50);
+      text("青臭い", (width/2)-200, height*3/4+50);
+      text("無臭", (width/2), height*3/4+50);
       text("果実", (width/2)+200, height*3/4+50);
-      text("バラ", (width/2)+400, height*3/4+50);
+      text("その他", (width/2)+400, height*3/4+50);
       rect((width/2)-300, height*3/4, 5, 20);
       rect((width/2)+300, height*3/4, 5, 20);
       rect((width/2)-100, height*3/4, 5, 20);
@@ -479,15 +479,15 @@ class Questionnaire{
       fill(255,0,0);
       if( 0 <= parameter && parameter < (((width/2)-300)-((width/2)-500))/10 ){
         
-        text("カラメル", (width/2)-400, height*3/4+50);
+        text("ガソリン", (width/2)-400, height*3/4+50);
         
       }else if( (((width/2)-300)-((width/2)-500))/10 <= parameter && parameter < (((width/2)-100)-((width/2)-500))/10 ){
         
-        text("カビ", (width/2)-200, height*3/4+50);
+        text("青臭い", (width/2)-200, height*3/4+50);
         
       }else if( (((width/2)-100)-((width/2)-500))/10 <= parameter && parameter < (((width/2)+100)-((width/2)-500))/10 ){
         
-        text("魚", (width/2), height*3/4+50);
+        text("無臭", (width/2), height*3/4+50);
         
       }else if( (((width/2)+100)-((width/2)-500))/10 <= parameter && parameter < (((width/2)+300)-((width/2)-500))/10 ){
         
@@ -495,16 +495,16 @@ class Questionnaire{
         
       }else{
         
-        text("バラ", (width/2)+400, height*3/4+50);
+        text("その他", (width/2)+400, height*3/4+50);
         
       }
     } else {
       fill(0);
-      text("カラメル", (width/2)-400, height*3/4+50);
-      text("カビ", (width/2)-200, height*3/4+50);
-      text("魚", (width/2), height*3/4+50);
+      text("ガソリン", (width/2)-400, height*3/4+50);
+      text("青臭い", (width/2)-200, height*3/4+50);
+      text("無臭", (width/2), height*3/4+50);
       text("果実", (width/2)+200, height*3/4+50);
-      text("バラ", (width/2)+400, height*3/4+50);
+      text("その他", (width/2)+400, height*3/4+50);
     }
   }
 }
