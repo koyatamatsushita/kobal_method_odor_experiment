@@ -370,7 +370,7 @@ class Questionnaire{
     println("結果: " +x);
     output.print(","+x);
         
-    if(questionNo < 6){
+    if(questionNo < 5){
       questionNo++;
     }else{
       questionNo = 0;

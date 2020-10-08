@@ -1,0 +1,5 @@
+No,Stimulation,Intensity,Kassei,Hikassei,Kai,Fukai
+0,FIRSTQUESTION
+1,Oldoil,50.75,62.5,52.0,58.25,37.75,39.5
+0,FIRSTQUESTION
+2,Oldoil,22.0,23.0,32.75,75.0,58.5,36.75

@@ -22,7 +22,7 @@ SvmePin is always opened through experiment by toggle switch.
 boolean isCheck = false;
 
 // If fMRI experiment, then true. @Saijo, then false.
-boolean isMRIexperiment = true;
+boolean isMRIexperiment = false;
 
 /******************************* Set pin Number *******************************/
 // !caution!
@@ -46,13 +46,13 @@ const int BlockNum = 3;
 const int OdorPattern[SessionNum][RunNum][BlockNum] = {
   // Sub.A(Akiyoshi)
   { {Air, Air, Air},
-    {Odor1, Odor1, Odor1},
-    {Odor2, Odor2, Odor2} },// session1
-  { {Odor2, Odor2, Odor2},
-    {Air, Air, Air},
-    {Odor1, Odor1, Odor1} },//session2
-  { {Odor1, Odor1, Odor1},
     {Odor2, Odor2, Odor2},
+    {Odor1, Odor1, Odor1} },// session1
+  { {Odor1, Odor1, Odor1},
+    {Air, Air, Air},
+    {Odor2, Odor2, Odor2} },//session2
+  { {Odor2, Odor2, Odor2},
+    {Odor1, Odor1, Odor1},
     {Air, Air, Air} }//session3
 };
 
