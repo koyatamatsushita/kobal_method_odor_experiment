@@ -113,26 +113,26 @@ void loop() {
   // ENTER key is pressed.
   if(Serial.read()=='a'){
 
-    /*
-     * threshold control
-     */
-     Serial.print('c'); // threshold control display
-     while(1)
-      if(Serial.read()=='a') break; // When press ENTER key, go to next step.
+    // /*
+    //  * threshold control
+    //  */
+    //  Serial.print('c'); // threshold control display
+    //  while(1)
+    //   if(Serial.read()=='a') break; // When press ENTER key, go to next step.
 
-    /*
-     * structural imaging
-     */
-    Serial.print('d'); // structural imaging display
-    while(1)
-      if(Serial.read()=='a') break;
+    // /*
+    //  * structural imaging
+    //  */
+    // Serial.print('d'); // structural imaging display
+    // while(1)
+    //   if(Serial.read()=='a') break;
 
-    /*
-     *  noise canceling settings
-     */
-    Serial.print('e'); // noise canceling display
-    while(1)
-      if(Serial.read()=='a') break;
+    // /*
+    //  *  noise canceling settings
+    //  */
+    // Serial.print('e'); // noise canceling display
+    // while(1)
+    //   if(Serial.read()=='a') break;
 
     /*
      * Session loop
