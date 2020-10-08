@@ -180,6 +180,7 @@ void draw() {
     case 'g':
       println("\nアンケートを始めます");
       
+      question.resetQuestionNo();
       question.darkScreen();
       textAlign(CENTER);
       textSize(50);
@@ -420,7 +421,7 @@ class Questionnaire{
     println("結果: " +x);
     output.print(","+x);
         
-    if(questionNo < 5){
+    if(questionNo < 6){
       questionNo++;
     }else{
       questionNo = 0;
@@ -449,8 +450,6 @@ class Questionnaire{
     // white axis
     fill(255);
     noStroke();
-    text(0, (width/2)-400, height*3/4-20);
-    text(100, (width/2)+400, height*3/4-20); 
     rect(width/2, height*3/4, 800, 10);
     rect((width/2)-400, height*3/4, 5, 30);
     rect((width/2)+400, height*3/4, 5, 30); 
@@ -460,16 +459,40 @@ class Questionnaire{
     rect((int)pointer, height*3/4-20, 5, 30);
 
     // 選択項目
-    if(questionNo == 5){
-      fill(0);
-      text(0, (width/2)-500, height*3/4-20);
-      text(100, (width/2)+500, height*3/4-20); 
+    if(questionNo == 0){
+      // 軸両端の数字
+      fill(255);
+      text(0, (width/2)-400, height*3/4-20);
+      text(100, (width/2)+400, height*3/4-20); 
+      
+      // 質のアンケートはgrayout
+      fill(30);
+      text("ガソリン", (width/2)-400, height*3/4+50);
+      text("青臭い", (width/2)-200, height*3/4+50);
+      text("無臭", (width/2), height*3/4+50);
+      text("果実", (width/2)+200, height*3/4+50);
+      text("その他", (width/2)+400, height*3/4+50);
+      
+      // ニオイ強度表示項目
+      fill(255);
+      textSize(30);
+      text("無臭", (width/2)-400, height*3/4-70);
+      text("やっと感知できる", (width/2)-300, height*3/4-100);
+      text("ニオイがわかる", (width/2)-100, height*3/4-70);
+      text("楽に感知できる", (width/2)+50, height*3/4-100);
+      text("強いニオイ", (width/2)+250, height*3/4-70);
+      text("強烈なニオイ", (width/2)+400, height*3/4-100);
+      
+    } else if(questionNo == 5) {
+      // 質アンケート
       fill(255);
       text("ガソリン", (width/2)-400, height*3/4+50);
       text("青臭い", (width/2)-200, height*3/4+50);
       text("無臭", (width/2), height*3/4+50);
       text("果実", (width/2)+200, height*3/4+50);
       text("その他", (width/2)+400, height*3/4+50);
+      
+      // 軸中の区切り
       rect((width/2)-300, height*3/4, 5, 20);
       rect((width/2)+300, height*3/4, 5, 20);
       rect((width/2)-100, height*3/4, 5, 20);
@@ -478,33 +501,31 @@ class Questionnaire{
       // 選択項目の赤色表示
       fill(255,0,0);
       if( 0 <= parameter && parameter < (((width/2)-300)-((width/2)-500))/10 ){
-        
         text("ガソリン", (width/2)-400, height*3/4+50);
-        
       }else if( (((width/2)-300)-((width/2)-500))/10 <= parameter && parameter < (((width/2)-100)-((width/2)-500))/10 ){
-        
         text("青臭い", (width/2)-200, height*3/4+50);
-        
       }else if( (((width/2)-100)-((width/2)-500))/10 <= parameter && parameter < (((width/2)+100)-((width/2)-500))/10 ){
-        
         text("無臭", (width/2), height*3/4+50);
-        
       }else if( (((width/2)+100)-((width/2)-500))/10 <= parameter && parameter < (((width/2)+300)-((width/2)-500))/10 ){
-        
-        text("果実", (width/2)+200, height*3/4+50);
-        
+        text("果実", (width/2)+200, height*3/4+50);        
       }else{
-        
         text("その他", (width/2)+400, height*3/4+50);
-        
       }
+      
     } else {
-      fill(0);
+      // 軸両端の数字
+      fill(255);
+      text(0, (width/2)-400, height*3/4-20);
+      text(100, (width/2)+400, height*3/4-20); 
+      
+      // 質の項目をgrayout
+      fill(30);
       text("ガソリン", (width/2)-400, height*3/4+50);
       text("青臭い", (width/2)-200, height*3/4+50);
       text("無臭", (width/2), height*3/4+50);
       text("果実", (width/2)+200, height*3/4+50);
       text("その他", (width/2)+400, height*3/4+50);
+      
     }
   }
 }
