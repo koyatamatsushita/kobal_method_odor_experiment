@@ -22,9 +22,9 @@ boolean isMRIexperiment = false;
 boolean isBreath = false;
 
 // Select odor combination
-// [Odor1Type] lactone: p, PEA: o, cycroten: i
+// [Odor1Type] lactone: p, PEA: o, cycroten: i, heptanal: q, benzene: w
 char Odor1Type = 'q';
-// [Odor2Type] heptanal: q, benzene: w
+// [Odor2Type] lactone: p, PEA: o, cycroten: i, heptanal: q, benzene: w
 char Odor2Type = 'q';
 
 /******************************* Set pin Number *******************************/
@@ -211,14 +211,26 @@ void odorTrial(int odorType, long trialTime, boolean breathFlag) {
         }
       } else {
         switch (Odor2Type) {
+          case 'p':
+            Serial.print('p'); // lactone display
+            break;
+          
+          case 'o':
+            Serial.print('o'); // PEA display
+            break;
+          
+          case 'i':
+            Serial.print('i'); // cycroten display
+            break;
+
+          case 'w':
+            Serial.print('w'); // benzene display
+            break;
+
           case 'q':
             Serial.print('q'); // heptanal display
             break;
           
-          case 'w':
-          Serial.print('w'); // tri methyl benzene display
-          break;
-    
           default:
             break;
         }
