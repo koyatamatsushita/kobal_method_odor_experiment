@@ -51,8 +51,8 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
   { {Odor1, Odor1, Odor1},
     {Air, Air, Air},
     {Odor2, Odor2, Odor2} },//session2
-  { {Odor2, Odor2, Odor2},
-    {Odor1, Odor1, Odor1},
+  { {Odor1, Odor1, Odor1},
+    {Odor2, Odor2, Odor2},
     {Air, Air, Air} }//session3
 };
 
