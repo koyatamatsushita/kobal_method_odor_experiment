@@ -22,7 +22,7 @@ SvmePin is always opened through experiment by toggle switch.
 boolean isCheck = false;
 
 // If fMRI experiment, then true. @Saijo, then false.
-boolean isMRIexperiment = false;
+boolean isMRIexperiment = true;
 
 /******************************* Set pin Number *******************************/
 // !caution!
@@ -44,6 +44,7 @@ const int BlockNum = 3;
 
 // Please set stimulation pattern.
 const int OdorPattern[SessionNum][RunNum][BlockNum] = {
+  /*
   // Sub.A(Akiyoshi)
   { {Air, Air, Air},
     {Odor2, Odor2, Odor2},
@@ -54,6 +55,45 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
   { {Odor2, Odor2, Odor2},
     {Odor1, Odor1, Odor1},
     {Air, Air, Air} }//session3
+  */
+
+  // Sub.B()
+  { {Air, Air, Air},
+    {Odor1, Odor1, Odor1},
+    {Odor2, Odor2, Odor2} },// session1
+  { {Odor2, Odor2, Odor2},
+    {Air, Air, Air},
+    {Odor1, Odor1, Odor1} },//session2
+  { {Odor1, Odor1, Odor1},
+    {Odor2, Odor2, Odor2},
+    {Air, Air, Air} }//session3
+
+  /*
+  // Sub.C()
+  { {Odor2, Odor2, Odor2},
+    {Odor1, Odor1, Odor1},
+    {Air, Air, Air} }//session1
+  { {Odor1, Odor1, Odor1},
+    {Air, Air, Air},
+    {Odor2, Odor2, Odor2} },//session2
+  { {Air, Air, Air},
+    {Odor2, Odor2, Odor2},
+    {Odor1, Odor1, Odor1} },// session3
+  */
+
+  /*
+  // Sub.D()
+  { {Odor1, Odor1, Odor1},
+    {Odor2, Odor2, Odor2},
+    {Air, Air, Air} }//session1
+  { {Odor2, Odor2, Odor2},
+    {Air, Air, Air},
+    {Odor1, Odor1, Odor1} },//session2
+  { {Air, Air, Air},
+    {Odor1, Odor1, Odor1},
+    {Odor2, Odor2, Odor2} },// session3
+  */
+
 };
 
 /******************************************************************************/

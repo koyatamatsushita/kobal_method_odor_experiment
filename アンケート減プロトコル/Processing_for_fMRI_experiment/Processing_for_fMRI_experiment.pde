@@ -25,7 +25,7 @@ void setup() {
   question = new Questionnaire();
   
   // シリアルポートの設定
-  port = new Serial(this,"COM3", 9600); //Arduino>ツール＞ボードから要確認！  
+  port = new Serial(this,"COM4", 9600); //Arduino>ツール＞ボードから要確認！  
   
   // 画面の初期設定
   size(2150,1150);
@@ -97,9 +97,9 @@ void draw() {
       port.clear();
       break;
 
-    // 快臭
+    // 低濃度臭
     case 'p':
-      println("快臭提示 2s...");
+      println("低濃度臭提示 2s...");
       
       question.darkScreen();
       fill(255);
@@ -112,9 +112,9 @@ void draw() {
       port.clear();
       break;
     
-    // 不快臭
+    // 高濃度臭
     case 'u':
-      println("不快臭提示 2s...");
+      println("高濃度臭提示 2s...");
       
       question.darkScreen();
       fill(255);
@@ -421,7 +421,7 @@ class Questionnaire{
     println("結果: " +x);
     output.print(","+x);
         
-    if(questionNo < 6){
+    if(questionNo < 5){
       questionNo++;
     }else{
       questionNo = 0;
@@ -476,12 +476,12 @@ class Questionnaire{
       // ニオイ強度表示項目
       fill(255);
       textSize(30);
-      text("無臭", (width/2)-400, height*3/4-70);
-      text("やっと感知できる", (width/2)-300, height*3/4-100);
-      text("ニオイがわかる", (width/2)-100, height*3/4-70);
-      text("楽に感知できる", (width/2)+50, height*3/4-100);
-      text("強いニオイ", (width/2)+250, height*3/4-70);
-      text("強烈なニオイ", (width/2)+400, height*3/4-100);
+      //text("無臭", (width/2)-400, height*3/4-70);
+      text("感知できる", (width/2)-300, height*3/4-70);
+      text("質がわかる", (width/2), height*3/4-70);
+      // text("楽に感知できる", (width/2)+50, height*3/4-70);
+      // text("強いニオイ", (width/2)+250, height*3/4-70);
+      text("強烈なニオイ", (width/2)+300, height*3/4-70);
       
     } else if(questionNo == 5) {
       // 質アンケート

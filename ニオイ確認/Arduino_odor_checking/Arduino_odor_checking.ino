@@ -111,6 +111,13 @@ void loop() {
         
         checkFlag = true;
         break;
+      
+      case 'q':
+
+        questionnaire();
+        checkFlag = true;
+        break;
+        
     }
     
     if(checkFlag == true) break;

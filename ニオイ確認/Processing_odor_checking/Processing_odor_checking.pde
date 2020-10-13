@@ -52,7 +52,7 @@ void draw() {
       
     // 初期安静
     case 'a':
-      println("\nperss any key...\n p: odor1\n u: odor2\n n: odorless air\n");
+      println("\nperss any key...\n p: odor1\n u: odor2\n n: odorless air\n q: questionnaire\n");
       
       question.darkScreen();
       fill(255);
@@ -245,6 +245,12 @@ void keyPressed(){
       port.write('u');
       port.clear();
       break;
+
+    // questionnaire
+    case 'q':
+      port.write('q');
+      port.clear();
+      break;
     
     // ダイヤル装置を回転させるとt, bが押下された判定がなされる
     // アンケートの解答(順方向)
@@ -426,12 +432,12 @@ class Questionnaire{
       // ニオイ強度表示項目
       fill(255);
       textSize(30);
-      text("無臭", (width/2)-400, height*3/4-70);
-      text("やっと感知できる", (width/2)-300, height*3/4-100);
-      text("ニオイがわかる", (width/2)-100, height*3/4-70);
-      text("楽に感知できる", (width/2)+50, height*3/4-100);
-      text("強いニオイ", (width/2)+250, height*3/4-70);
-      text("強烈なニオイ", (width/2)+400, height*3/4-100);
+      //text("無臭", (width/2)-400, height*3/4-70);
+      text("感知できる", (width/2)-300, height*3/4-70);
+      text("質がわかる", (width/2), height*3/4-70);
+      // text("楽に感知できる", (width/2)+50, height*3/4-70);
+      // text("強いニオイ", (width/2)+250, height*3/4-70);
+      text("強烈なニオイ", (width/2)+300, height*3/4-70);
       
     } else if(questionNo == 5) {
       // 質アンケート
