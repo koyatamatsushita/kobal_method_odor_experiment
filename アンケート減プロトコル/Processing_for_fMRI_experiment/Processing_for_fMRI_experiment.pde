@@ -25,7 +25,7 @@ void setup() {
   question = new Questionnaire();
   
   // シリアルポートの設定
-  port = new Serial(this,"COM4", 9600); //Arduino>ツール＞ボードから要確認！  
+  port = new Serial(this,"COM3", 9600); //Arduino>ツール＞ボードから要確認！  
   
   // 画面の初期設定
   size(2150,1150);
@@ -466,7 +466,7 @@ class Questionnaire{
       text(100, (width/2)+400, height*3/4-20); 
       
       // 質のアンケートはgrayout
-      fill(30);
+      fill(50);
       text("ガソリン", (width/2)-400, height*3/4+50);
       text("青臭い", (width/2)-200, height*3/4+50);
       text("無臭", (width/2), height*3/4+50);
@@ -519,7 +519,7 @@ class Questionnaire{
       text(100, (width/2)+400, height*3/4-20); 
       
       // 質の項目をgrayout
-      fill(30);
+      fill(50);
       text("ガソリン", (width/2)-400, height*3/4+50);
       text("青臭い", (width/2)-200, height*3/4+50);
       text("無臭", (width/2), height*3/4+50);

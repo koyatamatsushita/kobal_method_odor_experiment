@@ -422,7 +422,7 @@ class Questionnaire{
       text(100, (width/2)+400, height*3/4-20); 
       
       // 質のアンケートはgrayout
-      fill(30);
+      fill(50);
       text("ガソリン", (width/2)-400, height*3/4+50);
       text("青臭い", (width/2)-200, height*3/4+50);
       text("無臭", (width/2), height*3/4+50);
@@ -475,7 +475,7 @@ class Questionnaire{
       text(100, (width/2)+400, height*3/4-20); 
       
       // 質の項目をgrayout
-      fill(30);
+      fill(50);
       text("ガソリン", (width/2)-400, height*3/4+50);
       text("青臭い", (width/2)-200, height*3/4+50);
       text("無臭", (width/2), height*3/4+50);

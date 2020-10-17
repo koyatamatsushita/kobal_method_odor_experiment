@@ -44,8 +44,9 @@ const int BlockNum = 3;
 
 // Please set stimulation pattern.
 const int OdorPattern[SessionNum][RunNum][BlockNum] = {
-  /*
+  
   // Sub.A(Akiyoshi)
+  /*
   { {Air, Air, Air},
     {Odor1, Odor1, Odor1},
     {Odor2, Odor2, Odor2} },// session1(block A)
@@ -56,8 +57,8 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
     {Odor2, Odor2, Odor2},
     {Air, Air, Air} }//session3(block C)
   */
-
-  // Sub.B()
+  /*
+  // Sub.B(Harada)
   { {Air, Air, Air},
     {Odor2, Odor2, Odor2},
     {Odor1, Odor1, Odor1} },// session1(block D)
@@ -67,32 +68,42 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
   { {Odor2, Odor2, Odor2},
     {Odor1, Odor1, Odor1},
     {Air, Air, Air} }//session3(block F)
-
+  */
   /*
-  // Sub.C()
+  // Sub.C(Tachihara)
   { {Odor1, Odor1, Odor1},
     {Odor2, Odor2, Odor2},
-    {Air, Air, Air} }//session1(block C)
+    {Air, Air, Air} },//session1(block C)
   { {Odor2, Odor2, Odor2},
     {Air, Air, Air},
     {Odor1, Odor1, Odor1} },//session2(block B)
   { {Air, Air, Air},
     {Odor1, Odor1, Odor1},
-    {Odor2, Odor2, Odor2} },// session3(block A)
+    {Odor2, Odor2, Odor2} }// session3(block A)
   */
-
-  /*
-  // Sub.D()
+  // Sub.D(Sakagawa)
   { {Odor2, Odor2, Odor2},
     {Odor1, Odor1, Odor1},
-    {Air, Air, Air} }//session1(block F)
+    {Air, Air, Air} },//session1(block F)
   { {Odor1, Odor1, Odor1},
     {Air, Air, Air},
     {Odor2, Odor2, Odor2} },//session2(block E)
   { {Air, Air, Air},
     {Odor2, Odor2, Odor2},
-    {Odor1, Odor1, Odor1} },// session3(block D)
-  */
+    {Odor1, Odor1, Odor1} }// session3(block D)
+  
+  /*
+  // Sub.E(Anai)
+  { {Odor1, Odor1, Odor1},
+    {Odor2, Odor2, Odor2},
+    {Air, Air, Air} },//session1(block C)
+  { {Air, Air, Air},
+    {Odor1, Odor1, Odor1},
+    {Odor2, Odor2, Odor2} }// session2(block A)
+  { {Odor2, Odor2, Odor2},
+    {Air, Air, Air},
+    {Odor1, Odor1, Odor1} },//session3(block B)
+   */  
 
 };
 
