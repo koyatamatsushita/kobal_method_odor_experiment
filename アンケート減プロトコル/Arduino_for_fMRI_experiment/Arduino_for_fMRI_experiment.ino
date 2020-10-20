@@ -81,7 +81,7 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
     {Odor1, Odor1, Odor1},
     {Odor2, Odor2, Odor2} }// session3(block A)
   */
-  // Sub.D(Sakagawa)
+  // Sub.D(Kurota)
   { {Odor2, Odor2, Odor2},
     {Odor1, Odor1, Odor1},
     {Air, Air, Air} },//session1(block F)
@@ -93,7 +93,7 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
     {Odor1, Odor1, Odor1} }// session3(block D)
   
   /*
-  // Sub.E(Anai)
+  // Sub.E(Matsushita)
   { {Odor1, Odor1, Odor1},
     {Odor2, Odor2, Odor2},
     {Air, Air, Air} },//session1(block C)
@@ -104,7 +104,16 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
     {Air, Air, Air},
     {Odor1, Odor1, Odor1} },//session3(block B)
    */  
-
+  // Sub.F()
+  { {Odor2, Odor2, Odor2},
+    {Odor1, Odor1, Odor1},
+    {Air, Air, Air} },//session1(block F)
+  { {Air, Air, Air},
+    {Odor2, Odor2, Odor2},
+    {Odor1, Odor1, Odor1} },// session2(block D)
+  { {Odor1, Odor1, Odor1},
+    {Air, Air, Air},
+    {Odor2, Odor2, Odor2} }//session3(block E)
 };
 
 /******************************************************************************/
