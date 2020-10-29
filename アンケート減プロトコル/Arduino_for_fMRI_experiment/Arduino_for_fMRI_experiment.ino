@@ -44,9 +44,9 @@ const int BlockNum = 3;
 
 // Please set stimulation pattern.
 const int OdorPattern[SessionNum][RunNum][BlockNum] = {
-  
-  // Sub.A(Akiyoshi)
+
   /*
+  // Sub.A(Akiyoshi)
   { {Air, Air, Air},
     {Odor1, Odor1, Odor1},
     {Odor2, Odor2, Odor2} },// session1(block A)
@@ -93,7 +93,7 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
     {Odor2, Odor2, Odor2},
     {Odor1, Odor1, Odor1} }// session3(block D)
   */
-  
+  /*
   // Sub.E(Matsushita)
   { {Odor1, Odor1, Odor1},
     {Odor2, Odor2, Odor2},
@@ -104,9 +104,9 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
   { {Odor2, Odor2, Odor2},
     {Air, Air, Air},
     {Odor1, Odor1, Odor1} }//session3(block B)
-  
+  */
   /*   
-  // Sub.F()
+  // Sub.F(Sakagawa)
   { {Odor2, Odor2, Odor2},
     {Odor1, Odor1, Odor1},
     {Air, Air, Air} },//session1(block F)
@@ -117,6 +117,55 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
     {Air, Air, Air},
     {Odor2, Odor2, Odor2} }//session3(block E)
   */
+  
+  // Sub.G(Anai)
+  { {Odor2, Odor2, Odor2},
+    {Air, Air, Air},
+    {Odor1, Odor1, Odor1} },//session1(block B)
+  { {Odor1, Odor1, Odor1},
+    {Odor2, Odor2, Odor2},
+    {Air, Air, Air} },//session2(block C)
+  { {Air, Air, Air},
+    {Odor1, Odor1, Odor1},
+    {Odor2, Odor2, Odor2} }// session3(block A)
+  
+  /*
+  // Sub.H()
+  { {Odor1, Odor1, Odor1},
+    {Air, Air, Air},
+    {Odor2, Odor2, Odor2} },//session1(block E)
+  { {Odor2, Odor2, Odor2},
+    {Odor1, Odor1, Odor1},
+    {Air, Air, Air} },//session2(block F)
+  { {Air, Air, Air},
+    {Odor2, Odor2, Odor2},
+    {Odor1, Odor1, Odor1} }// session3(block D)
+  */
+  /*
+  // Sub.I()
+  { {Odor2, Odor2, Odor2},
+    {Air, Air, Air},
+    {Odor1, Odor1, Odor1} },//session1(block B)
+  { {Air, Air, Air},
+    {Odor1, Odor1, Odor1},
+    {Odor2, Odor2, Odor2} },// session2(block A)
+  { {Odor1, Odor1, Odor1},
+    {Odor2, Odor2, Odor2},
+    {Air, Air, Air} }//session3(block C)
+  */
+  /*
+  // Sub.J()
+  { {Air, Air, Air},
+    {Odor2, Odor2, Odor2},
+    {Odor1, Odor1, Odor1} },// session1(block D)
+  { {Odor2, Odor2, Odor2},
+    {Odor1, Odor1, Odor1},
+    {Air, Air, Air} },//session2(block F)
+  { {Odor1, Odor1, Odor1},
+    {Air, Air, Air},
+    {Odor2, Odor2, Odor2} }//session3(block E)
+  */
+  
 };
 
 /******************************************************************************/
