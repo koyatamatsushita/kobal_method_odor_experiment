@@ -22,7 +22,7 @@ SvmePin is always opened through experiment by toggle switch.
 boolean isCheck = false;
 
 // If fMRI experiment, then true. @Saijo, then false.
-boolean isMRIexperiment = true;
+boolean isMRIexperiment = false;
 
 /******************************* Set pin Number *******************************/
 // !caution!
@@ -117,7 +117,7 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
     {Air, Air, Air},
     {Odor2, Odor2, Odor2} }//session3(block E)
   */
-  
+  /*
   // Sub.G(Anai)
   { {Odor2, Odor2, Odor2},
     {Air, Air, Air},
@@ -128,9 +128,9 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
   { {Air, Air, Air},
     {Odor1, Odor1, Odor1},
     {Odor2, Odor2, Odor2} }// session3(block A)
-  
+  */
   /*
-  // Sub.H()
+  // Sub.H(Chen)
   { {Odor1, Odor1, Odor1},
     {Air, Air, Air},
     {Odor2, Odor2, Odor2} },//session1(block E)
@@ -142,7 +142,7 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
     {Odor1, Odor1, Odor1} }// session3(block D)
   */
   /*
-  // Sub.I()
+  // Sub.I(Ikeda)
   { {Odor2, Odor2, Odor2},
     {Air, Air, Air},
     {Odor1, Odor1, Odor1} },//session1(block B)
@@ -153,8 +153,8 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
     {Odor2, Odor2, Odor2},
     {Air, Air, Air} }//session3(block C)
   */
-  /*
-  // Sub.J()
+  
+  // Sub.J(Hashimoto)
   { {Air, Air, Air},
     {Odor2, Odor2, Odor2},
     {Odor1, Odor1, Odor1} },// session1(block D)
@@ -164,7 +164,7 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
   { {Odor1, Odor1, Odor1},
     {Air, Air, Air},
     {Odor2, Odor2, Odor2} }//session3(block E)
-  */
+  
   
 };
 
