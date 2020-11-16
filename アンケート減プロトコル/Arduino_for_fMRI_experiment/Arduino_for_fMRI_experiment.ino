@@ -153,8 +153,8 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
     {Odor2, Odor2, Odor2},
     {Air, Air, Air} }//session3(block C)
   */
-  
-  // Sub.J(Hashimoto)
+  /*
+  // Sub.J(Hashimoto)(fMRI実験不可)
   { {Air, Air, Air},
     {Odor2, Odor2, Odor2},
     {Odor1, Odor1, Odor1} },// session1(block D)
@@ -164,7 +164,18 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
   { {Odor1, Odor1, Odor1},
     {Air, Air, Air},
     {Odor2, Odor2, Odor2} }//session3(block E)
+  */
   
+  // Sub.K(Sekimoto)
+  { {Air, Air, Air},
+    {Odor1, Odor1, Odor1},
+    {Odor2, Odor2, Odor2} },// session1(block A)
+  { {Odor1, Odor1, Odor1},
+    {Odor2, Odor2, Odor2},
+    {Air, Air, Air} },//session2(block C)
+  { {Odor2, Odor2, Odor2},
+    {Air, Air, Air},
+    {Odor1, Odor1, Odor1} }//session3(block B)
   
 };
 
