@@ -270,8 +270,7 @@ void draw() {
       question.darkScreen();
       textAlign(CENTER);
       textSize(50);
-      fill(255);
-      text("これで実験はすべて終了です．\n\nご協力ありがとうございました．",width/2,height/2);       
+      fill(255);       
       
       output.close();
       port.clear();

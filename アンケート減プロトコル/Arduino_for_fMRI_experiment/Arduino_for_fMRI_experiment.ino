@@ -46,8 +46,8 @@ const int BlockNum = 3;
 const int OdorPattern[SessionNum][RunNum][BlockNum] = {
 
   /*
-  // Sub.A(Akiyoshi,Okawa)
-  { {Air, Air, Air},
+  // Sub.A(Akiyoshi,Imaoka)
+  {  {Air, Air, Air},
     {Odor1, Odor1, Odor1},
     {Odor2, Odor2, Odor2} },// session1(block A)
   { {Odor2, Odor2, Odor2},
@@ -58,7 +58,7 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
     {Air, Air, Air} }//session3(block C)
   */
   /*
-  // Sub.B(Harada,Imaoka)
+  // Sub.B(Harada,Okumura)
   { {Air, Air, Air},
     {Odor2, Odor2, Odor2},
     {Odor1, Odor1, Odor1} },// session1(block D)
@@ -70,7 +70,7 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
     {Air, Air, Air} }//session3(block F)
   */
   /*
-  // Sub.C(Tachihara,Okumura)
+  // Sub.C(Tachihara,Okawa)
   { {Odor1, Odor1, Odor1},
     {Odor2, Odor2, Odor2},
     {Air, Air, Air} },//session1(block C)
@@ -105,7 +105,7 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
     {Air, Air, Air},
     {Odor1, Odor1, Odor1} }//session3(block B)
   */
-     
+  /*   
   // Sub.F(Sakagawa,Hamada)
   { {Odor2, Odor2, Odor2},
     {Odor1, Odor1, Odor1},
@@ -116,9 +116,9 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
   { {Odor1, Odor1, Odor1},
     {Air, Air, Air},
     {Odor2, Odor2, Odor2} }//session3(block E)
-  
+  */
   /*
-  // Sub.G(Anai)
+  // Sub.G(Anai,Hatamoto)
   { {Odor2, Odor2, Odor2},
     {Air, Air, Air},
     {Odor1, Odor1, Odor1} },//session1(block B)
@@ -130,7 +130,7 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
     {Odor2, Odor2, Odor2} }// session3(block A)
   */
   /*
-  // Sub.H(Chen)
+  // Sub.H(Chen,Onishi)
   { {Odor1, Odor1, Odor1},
     {Air, Air, Air},
     {Odor2, Odor2, Odor2} },//session1(block E)
@@ -141,8 +141,8 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
     {Odor2, Odor2, Odor2},
     {Odor1, Odor1, Odor1} }// session3(block D)
   */
-  /*
-  // Sub.I(Ikeda)
+  
+  // Sub.I(Ikeda,Kumagai)
   { {Odor2, Odor2, Odor2},
     {Air, Air, Air},
     {Odor1, Odor1, Odor1} },//session1(block B)
@@ -152,7 +152,7 @@ const int OdorPattern[SessionNum][RunNum][BlockNum] = {
   { {Odor1, Odor1, Odor1},
     {Odor2, Odor2, Odor2},
     {Air, Air, Air} }//session3(block C)
-  */
+  
   /*
   // Sub.J(sekimoto)
   { {Air, Air, Air},
